@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hekai Wang — Research overview</title>
+<style>
+@font-face { font-family: "Newsreader Display"; font-weight: 400; src: url("fonts/NewsreaderDisplay-400.ttf"); }
+@font-face { font-family: "Newsreader"; font-weight: 400; src: url("fonts/NewsreaderText-400.ttf"); }
+@font-face { font-family: "Newsreader"; font-weight: 500; src: url("fonts/NewsreaderText-500.ttf"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 400; src: url("fonts/SourceSans3-400.ttf"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 600; src: url("fonts/SourceSans3-600.ttf"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 700; src: url("fonts/SourceSans3-700.ttf"); }
+@page { size: 1600px 1330px; margin: 0; }
+:root {
+  --paper: #f7f5f0;
+  --card: #ffffff;
+  --ink: #16171a;
+  --text: #33363b;
+  --muted: #6a6d73;
+  --rule: #e2ddd3;
+  --t1: #9a3f2b;
+  --t2: #2f5f7a;
+  --t3: #3f6e5e;
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Source Sans 3", Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1600px; height: 1330px; }
+body { background: var(--paper); color: var(--text); font-family: var(--sans); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; font-kerning: normal; }
+a { color: inherit; text-decoration: none; }
+.page { display: grid; grid-template-rows: auto 1fr auto; gap: 26px; width: 1600px; height: 1330px; padding: 48px 56px 32px; overflow: hidden; }
+
+/* Header */
+.top { display: grid; grid-template-columns: minmax(0, 1fr) 600px; gap: 56px; align-items: end; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+.kicker { margin-bottom: 12px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--t1); }
+h1 { font-family: "Newsreader Display", var(--serif); font-weight: 400; font-size: 64px; line-height: .98; letter-spacing: -.025em; color: var(--ink); }
+.lede { margin-top: 12px; font-family: var(--serif); font-size: 22px; line-height: 1.3; color: var(--ink); }
+.who { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+.who b { color: var(--ink); font-weight: 700; }
+.question-label { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.themes { margin-top: 6px; list-style: none; border-top: 1px solid var(--rule); }
+.themes li { display: grid; grid-template-columns: 30px 104px minmax(0, 1fr); align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: 13px; color: var(--text); }
+.themes .n { font-family: var(--serif); font-size: 16px; }
+.themes .name { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.stats { display: flex; margin-top: 12px; list-style: none; }
+.stats li { padding: 0 16px; border-left: 1px solid var(--rule); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.stats li:first-child { padding-left: 0; border-left: 0; }
+.stats b { margin-right: 6px; font-family: var(--serif); font-size: 21px; font-weight: 500; color: var(--ink); vertical-align: -1px; }
+
+/* Cards */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 22px; min-height: 0; }
+.card { position: relative; display: flex; flex-direction: column; min-height: 0; padding: 20px 22px 16px; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; }
+.card > * { flex-shrink: 0; }
+.card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--c); }
+.c1 { --c: var(--t1); } .c2 { --c: var(--t2); } .c3 { --c: var(--t3); }
+.head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.theme { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--c); }
+.theme b { margin-right: 6px; font-family: var(--serif); font-size: 14px; font-weight: 500; letter-spacing: 0; }
+.venue { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.venue i { font-style: normal; font-weight: 600; color: var(--muted); }
+.venue.oral i { color: var(--t1); letter-spacing: .06em; text-transform: uppercase; font-size: 10.5px; }
+h2 { margin-top: 8px; font-family: var(--serif); font-size: 29px; font-weight: 500; line-height: 1.05; letter-spacing: -.012em; color: var(--ink); }
+.ptitle { margin-top: 5px; height: 36px; overflow: hidden; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+.fig { flex: none; display: flex; align-items: center; justify-content: center; height: 175px; margin: 14px -6px 0; }
+.fig img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.idea { margin-top: 14px; font-size: 13.5px; line-height: 1.5; color: var(--text); }
+.result { margin-top: 8px; margin-bottom: 10px; padding-left: 10px; border-left: 2px solid var(--c); font-size: 13px; line-height: 1.48; color: var(--ink); }
+.result b { font-weight: 700; }
+.meta { display: flex; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 8px; border-top: 1px solid #efebe3; font-size: 11.5px; color: var(--muted); }
+.meta .links { display: flex; gap: 12px; white-space: nowrap; font-weight: 700; color: var(--ink); }
+.meta .links a { border-bottom: 1px solid var(--rule); }
+.right { display: inline-flex; align-items: center; gap: 10px; }
+.role { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+
+/* Footer */
+.foot { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 12.5px; color: var(--muted); }
+.foot .contact { display: flex; gap: 20px; font-weight: 600; color: var(--ink); }
+.foot .contact span { color: var(--muted); font-weight: 400; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top">
+    <div>
+      <p class="kicker">Research overview · November 2026</p>
+      <h1>Anatomy as a bridge</h1>
+      <p class="lede">How much anatomical information is available, and how should a model use it?</p>
+      <p class="who"><b>Hekai Wang</b> · M.S. student, University of Chinese Academy of Sciences · Graduate researcher, SIAT, Chinese Academy of Sciences</p>
+    </div>
+    <div>
+      <p class="question-label">Three directions</p>
+      <ol class="themes">
+        <li><span class="n" style="color:var(--t1)">01</span><span class="name" style="color:var(--t1)">Understand</span><span>Segment anatomy across organs and whichever MRI sequences exist</span></li>
+        <li><span class="n" style="color:var(--t2)">02</span><span class="name" style="color:var(--t2)">Recover</span><span>Synthesize missing MRI, diffusion maps or 3D CT from limited inputs</span></li>
+        <li><span class="n" style="color:var(--t3)">03</span><span class="name" style="color:var(--t3)">Review</span><span>Check whether an image retains the anatomy a report refers to</span></li>
+      </ol>
+      <ul class="stats">
+        <li><b>6</b>studies</li>
+        <li><b>3</b>accepted, all oral</li>
+        <li><b>3</b>under review</li>
+        <li><b>5</b>as first author</li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <article class="card c1">
+      <div class="head"><span class="theme"><b>01</b>Understand</span><span class="right"><span class="role">First author</span><span class="venue oral">EMBC 2026 <i>Oral</i></span></span></div>
+      <h2>AP-Mamba</h2>
+      <p class="ptitle">Anatomy-Aware State Space Models for Multi-organ Abdominal MRI Segmentation</p>
+      <figure class="fig"><img src="img/ap-mamba.jpg" alt="AP-Mamba network, Anatomical Prior Module and attention gate"></figure>
+      <p class="idea">A visual state-space network with an Anatomical Prior Module for global organ layout and co-occurrence; attention gates refine boundaries.</p>
+      <p class="result">Consistent Dice and NSD gains over CNN, Transformer and recent Mamba baselines.</p>
+      <p class="meta"><span>CHAOS-MRI (5-fold CV) · AMOS-MRI</span><span class="links"><a href="https://hekaiwang.github.io/papers/ap-mamba.pdf">Paper</a><a href="https://github.com/hekaiwang/AP-MAMBA">Code</a></span></p>
+    </article>
+
+    <article class="card c1">
+      <div class="head"><span class="theme"><b>01</b>Understand</span><span class="right"><span class="role">First author</span><span class="venue">IEEE TMI <i>Under review</i></span></span></div>
+      <h2>ReLiSS</h2>
+      <p class="ptitle">Modality-Adaptive Representation Conditioning for Multimodal MRI Segmentation under Arbitrary Modality Availability</p>
+      <figure class="fig"><img src="img/reliss.jpg" alt="ReLiSS architecture"></figure>
+      <p class="idea">Availability-gated spatial–spectral conditioning adapts one CNN–Mamba segmenter to any subset of MRI sequences, with evidential uncertainty.</p>
+      <p class="result">Highest mean Dice under incomplete inputs: <b>80.82%</b> BraTS2021, <b>65.08%</b> ISLES2022, <b>70.68%</b> WMH2017, <b>64.20%</b> TSC.</p>
+      <p class="meta"><span>28 incomplete-modality settings</span><span class="links"><a href="https://hekaiwang.github.io/papers/reliss.pdf">Paper</a><a href="https://github.com/hekaiwang/ReLiSS">Code</a></span></p>
+    </article>
+
+    <article class="card c2">
+      <div class="head"><span class="theme"><b>02</b>Recover</span><span class="right"><span class="role">First author</span><span class="venue oral">BIBM 2026 <i>Oral</i></span></span></div>
+      <h2>PriorFM</h2>
+      <p class="ptitle">Prior-Guided Flow Matching for Missing Modality MRI Synthesis</p>
+      <figure class="fig"><img src="img/prior-flow.jpg" alt="PriorFM method overview"></figure>
+      <p class="idea">Fuses any subset of observed sequences into a coarse anatomical prior, then refines it by conditional flow matching in a few Euler steps.</p>
+      <p class="result">Best average synthesis over <b>32</b> source-to-target tasks; synthesized scans give segmentation Dice close to real scans.</p>
+      <p class="meta"><span>BraTS2021 · CHAOS · Diff5T</span><span class="links"><a href="https://hekaiwang.github.io/papers/prior-flow.pdf">Paper</a><a href="https://github.com/hekaiwang/PriorFM">Code</a></span></p>
+    </article>
+
+    <article class="card c2">
+      <div class="head"><span class="theme"><b>02</b>Recover</span><span class="right"><span class="role">First author</span><span class="venue">ISBI 2027 <i>Under review</i></span></span></div>
+      <h2>UPath-X2CT</h2>
+      <p class="ptitle">Geometry-Aware Biplanar Chest CT Reconstruction with Residual Latent Diffusion</p>
+      <figure class="fig"><img src="img/upath.jpg" alt="UPath-X2CT method overview"></figure>
+      <p class="idea">Calibrated projections lift biplanar X-ray features onto a shared 3D grid; conditional diffusion refines the residual of a coarse latent CT.</p>
+      <p class="result">Outperforms five baselines in PSNR, SSIM and MAE, with <b>+1.23 to 1.80 dB</b> PSNR over DVG-Diffusion.</p>
+      <p class="meta"><span>LIDC-IDRI · MSD Lung · CT-RATE</span><span class="links"><a href="https://hekaiwang.github.io/papers/upath.pdf">Paper</a><a href="https://github.com/hekaiwang/UPath-X2CT">Code</a></span></p>
+    </article>
+
+    <article class="card c2">
+      <div class="head"><span class="theme"><b>02</b>Recover</span><span class="right"><span class="role">Third author</span><span class="venue oral">BHI 2026 <i>Oral</i></span></span></div>
+      <h2>ATLANTIS</h2>
+      <p class="ptitle">An Anatomy-guided Tissue-Latent Atlas Network for DWI-derived White-Matter Anisotropy Synthesis from T1w MRI</p>
+      <figure class="fig"><img src="img/atlantis.jpg" alt="ATLANTIS architecture"></figure>
+      <p class="idea">Synthesizes fractional anisotropy maps from routine T1w MRI using tissue-aware modulation, prior-restoration decoding and adaptive fusion.</p>
+      <p class="result">Image-level MAE 5.0% below ResViT; tract-level MAE and bias reduced by <b>20.2%</b> and <b>83.3%</b> across eight JHU tracts.</p>
+      <p class="meta"><span>HCP Young Adult · 97 test subjects</span><span class="links"><a href="https://hekaiwang.github.io/papers/atlantis.pdf">Paper</a></span></p>
+    </article>
+
+    <article class="card c3">
+      <div class="head"><span class="theme"><b>03</b>Review</span><span class="right"><span class="role">First author</span><span class="venue">ESWA <i>Under review</i></span></span></div>
+      <h2>OA-CXR</h2>
+      <p class="ptitle">An Anatomical Retention-Guided System for Selective Chest Radiograph Report Review</p>
+      <figure class="fig"><img src="img/oa-cxr.jpg" alt="OA-CXR two-stage learning, inference and report coverage review"></figure>
+      <p class="idea">Estimates how much of each region a radiograph retains, then maps report statements to regional queries to flag those needing review.</p>
+      <p class="result">Lowest MAE among <b>nine</b> retention regressors on every dataset (macro MAE <b>0.0296</b>).</p>
+      <p class="meta"><span>343,395 queries · 8,805 images · 4 datasets</span><span class="links"><a href="https://hekaiwang.github.io/papers/oa-cxr.pdf">Paper</a><a href="https://github.com/hekaiwang/OA-CXR">Code</a></span></p>
+    </article>
+
+  </main>
+
+  <footer class="foot">
+    <p class="contact"><a href="mailto:hk.wang2@siat.ac.cn">hk.wang2@siat.ac.cn</a><a href="https://hekaiwang.github.io/">hekaiwang.github.io</a><a href="https://github.com/hekaiwang">github.com/hekaiwang</a><span>Shenzhen, China</span></p>
+    <p>Status as of November 2026. Figures are method overviews from the respective papers. Personal research summary.</p>
+  </footer>
+
+</div>
+</body>
+</html>

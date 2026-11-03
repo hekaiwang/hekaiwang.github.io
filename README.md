@@ -18,3 +18,7 @@ Shared styles and behaviour live in `style.css` and `site.js`. The header and fo
 - **Photos**: phones and portrait tablets cross-fade `hero-phone-sunset.webp`, `hero-phone-night.webp` and `hero-phone-ginkgo.webp`; larger screens cross-fade `hero-ucas-gate.webp` and `hero-ucas-aerial.webp`. Page bands: Publications uses the aerial view (night photo on phones), Experience uses the gate (ginkgo photo on phones).
 - **Figures**: `assets/fig-*.webp`, shown only inside Details. `fig-reliss.webp` is the full ReLiSS architecture (not the compressed version in the current PDF).
 - **Papers**: `papers/*.pdf`, recompressed (images about 240–300 dpi) to keep downloads small.
+
+## Research overview (one-page PDF)
+
+`assets/hekai-wang-research-overview.pdf` is built from `overview-src/overview.html`: one card per paper, each with its method figure (`overview-src/img/`). After editing the HTML, run `node overview-src/build.js` (needs Playwright) to regenerate the PDF; it also prints a layout check (no clipped titles or overflowing cards). Bump `?v=` on the PDF links in `index.html` so browsers fetch the new file.
