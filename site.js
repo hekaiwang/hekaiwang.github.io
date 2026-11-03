@@ -1,23 +1,132 @@
 (() => {
- const dialog=document.querySelector('#research-dialog');
- const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- let lastTrigger;
- document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{
-  const p=window.RESEARCH_PROJECTS.find(p=>p.id===button.dataset.project); if(!p)return;
-  lastTrigger=button;
-  document.querySelector('#dialog-body').innerHTML=`<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><figure class="dialog-overview"><img src="assets/${escape(p.overview_asset)}" alt="Method overview from the ${escape(p.name)} paper"></figure><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 style="margin-top:20px">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c=>`<li>${escape(c)}</li>`).join('')}</ul><h3 style="margin-top:20px">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><details class="result-toggle"><summary>View a figure from the paper’s evaluation</summary><img src="assets/${escape(p.results_asset)}" alt="Evaluation figure from ${escape(p.name)}"><p>Original figure from the linked manuscript. See the paper for the full experimental setting.</p></details><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read the paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">Explore the code ↗</a></div>`;
-  dialog.showModal();document.body.style.overflow='hidden';
- }));
- const close=()=>dialog.close();document.querySelector('.dialog-close').addEventListener('click',close);
- dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});
- dialog.addEventListener('close',()=>{document.body.style.overflow='';lastTrigger?.focus();});
- document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
-  const filter=button.dataset.filter;let count=0;
-  document.querySelectorAll('[data-filter]').forEach(b=>{const active=b===button;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});
-  document.querySelectorAll('.publication').forEach(p=>{p.hidden=filter!=='all'&&p.dataset.status!==filter;if(!p.hidden)count++;});
-  document.querySelector('.filter-count').textContent=`${count} ${filter==='all'?'selected':button.textContent.toLowerCase()} ${count===1?'work':'works'}`;
- }));
- const nav=[...document.querySelectorAll('nav a')];let pending=false;
- function update(){let current=nav[0];for(const a of nav){const section=document.querySelector(a.hash);if(section.getBoundingClientRect().top<170)current=a;}nav.forEach(a=>{if(a===current)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});pending=false;}
- window.addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(update);}},{passive:true});update();
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const dialog = document.querySelector('#research-dialog');
+  const body = document.querySelector('#dialog-body');
+  let lastTrigger, toastTimer;
+  const notify = message => {
+    const toast = document.querySelector('.toast');
+    clearTimeout(toastTimer); toast.textContent = message; toast.hidden = false;
+    toastTimer = setTimeout(() => { toast.hidden = true; }, 4200);
+  };
+  function openDialog(trigger) {
+    if (!dialog.open) {
+      lastTrigger = trigger;
+      dialog.showModal();
+    }
+    dialog.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  function showProject(id, trigger) {
+    const p = window.RESEARCH_PROJECTS.find(item => item.id === id);
+    if (!p) return;
+    body.innerHTML = `<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><div class="figure-tabs" role="group" aria-label="Choose research figure"><button type="button" data-figure="overview" aria-pressed="true">Method overview</button><button type="button" data-figure="results" aria-pressed="false">Results & evaluation</button></div><figure class="dialog-overview"><img id="dialog-figure" src="assets/${escape(p.overview_asset)}" alt="Method overview from ${escape(p.name)}"></figure><p class="figure-caption">Original method figure from the linked paper.</p><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 class="subheading">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c => `<li>${escape(c)}</li>`).join('')}</ul><h3 class="subheading">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">View repository ↗</a><button type="button" class="citation-button" data-citation="${escape(p.id)}">Copy citation</button></div>`;
+    body.querySelectorAll('[data-figure]').forEach(button => button.addEventListener('click', () => {
+      const kind = button.dataset.figure;
+      body.querySelectorAll('[data-figure]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+      const img = body.querySelector('#dialog-figure');
+      img.src = 'assets/' + p[kind + '_asset'];
+      img.alt = (kind === 'overview' ? 'Method overview' : 'Evaluation figure') + ' from ' + p.name;
+      body.querySelector('.figure-caption').textContent = kind === 'overview' ? 'Original method figure from the linked paper.' : 'Original evaluation figure. Refer to the paper for the full experimental setting.';
+    }));
+    openDialog(trigger);
+  }
+  async function copyCitation(id, trigger) {
+    const citation = window.RESEARCH_CITATIONS[id];
+    if (!citation) return;
+    try {
+      await navigator.clipboard.writeText(citation);
+      notify('BibTeX citation copied.');
+    } catch {
+      body.innerHTML = '<p class="dialog-eyebrow">BIBTEX</p><h2 class="dialog-title" id="dialog-title">Copy citation</h2><p class="dialog-paper-title">Select and copy the citation below.</p><textarea class="citation-fallback" aria-label="BibTeX citation" readonly></textarea>';
+      body.querySelector('textarea').value = citation;
+      openDialog(trigger); body.querySelector('textarea').focus(); body.querySelector('textarea').select();
+    }
+  }
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-project], [data-citation]');
+    if (!trigger) return;
+    if (trigger.dataset.project) showProject(trigger.dataset.project, trigger);
+    else copyCitation(trigger.dataset.citation, trigger);
+  });
+  document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => {
+    if (event.target !== dialog) return;
+    const r = dialog.getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
+  });
+  dialog.addEventListener('close', () => { document.body.style.overflow = ''; if (lastTrigger?.isConnected) lastTrigger.focus(); });
+
+  const showcase = [
+    {image:'segmentation.webp',alt:'Multi-organ abdominal MRI segmentation examples from AP-Mamba',topic:'ANATOMY-AWARE UNDERSTANDING',title:'Structure makes a difference.',description:'Learning organ relationships and refining boundaries in abdominal MRI.',project:'ap-mamba',name:'AP-Mamba'},
+    {image:'synthesis.webp',alt:'MRI synthesis examples from PriorFM',topic:'LEARNING WITH INCOMPLETE INPUTS',title:'Recover the missing contrast.',description:'Using observed anatomy to guide missing-modality MRI synthesis.',project:'prior-flow',name:'PriorFM'},
+    {image:'review.webp',alt:'Anatomical retention and report review framework from OA-CXR',topic:'IMAGE–LANGUAGE CONSISTENCY',title:'Keep the evidence in view.',description:'Connecting retained anatomy with statements that warrant report review.',project:'oa-cxr',name:'OA-CXR'}
+  ];
+  document.querySelectorAll('[data-showcase]').forEach(button => button.addEventListener('click', () => {
+    const i = Number(button.dataset.showcase), item = showcase[i];
+    document.querySelectorAll('[data-showcase]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+    const img = document.querySelector('#showcase-image'); img.src = 'assets/' + item.image; img.alt = item.alt;
+    document.querySelector('#showcase-topic').textContent = item.topic;
+    document.querySelector('#showcase-title').textContent = item.title;
+    document.querySelector('#showcase-description').textContent = item.description;
+    document.querySelector('.showcase-counter').textContent = `0${i+1} / 03`;
+    const link = document.querySelector('.showcase-link'); link.dataset.project = item.project; link.innerHTML = `Explore ${escape(item.name)} <span aria-hidden="true">↗</span>`;
+    if (!reducedMotion && img.animate) img.animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:330,easing:'cubic-bezier(.2,.7,.2,1)'});
+  }));
+
+  const filters = [...document.querySelectorAll('[data-filter]')];
+  const publications = [...document.querySelectorAll('.publication')];
+  let selected = 'all';
+  function filterPapers() {
+    const query = document.querySelector('#paper-search').value.trim().toLowerCase();
+    const terms = query.split(/\s+/).filter(Boolean);
+    let count = 0;
+    publications.forEach(p => {
+      const text = p.dataset.search + ' ' + p.textContent.toLowerCase();
+      p.hidden = (selected !== 'all' && p.dataset.status !== selected) || !terms.every(term => text.includes(term));
+      if (!p.hidden) count++;
+    });
+    document.querySelector('.filter-count').textContent = `${count} of ${publications.length} selected works${query ? ' · Search results' : ''}`;
+    document.querySelector('.empty-search').hidden = count !== 0;
+  }
+  filters.forEach(button => button.addEventListener('click', () => {
+    selected = button.dataset.filter;
+    filters.forEach(b => { b.classList.toggle('selected', b === button); b.setAttribute('aria-pressed', String(b === button)); });
+    filterPapers();
+  }));
+  document.querySelector('#paper-search').addEventListener('input', filterPapers);
+  document.querySelector('#paper-search').addEventListener('search', filterPapers);
+  filterPapers();
+
+  const theme = document.querySelector('.theme-toggle');
+  function syncTheme() {
+    const dark = root.dataset.theme === 'dark';
+    theme.setAttribute('aria-pressed', String(dark));
+    theme.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    theme.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#101724' : '#f8faff';
+  }
+  theme.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('hekai-theme', root.dataset.theme); } catch {}
+    syncTheme();
+  }); syncTheme();
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    root.classList.add('js-motion');
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    }), {threshold:0.07});
+    document.querySelectorAll('.project-card, .poster-banner, .timeline-entry, .research-lens').forEach(el => { el.classList.add('reveal'); observer.observe(el); });
+  }
+  const nav = [...document.querySelectorAll('nav a')]; let pending = false;
+  function updateNavigation() {
+    let current = nav[0];
+    for (const link of nav) if (document.querySelector(link.hash).getBoundingClientRect().top < 170) current = link;
+    nav.forEach(link => { if (link === current) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); });
+    pending = false;
+  }
+  window.addEventListener('scroll', () => { if (!pending) { pending = true; requestAnimationFrame(updateNavigation); } }, {passive:true});
+  updateNavigation();
 })();
