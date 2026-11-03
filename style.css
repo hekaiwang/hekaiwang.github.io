@@ -322,6 +322,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .footer-row { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding-top: 24px; }
 .footer-row::before { content: ""; position: absolute; top: 0; left: var(--gutter); right: var(--gutter); height: 1px; background: rgba(255, 255, 255, .12); }
 .dot-sep { margin-inline: 10px; }
+.footer-note { margin-top: 4px; font-size: .8rem; color: rgba(255, 255, 255, .5); }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
 .footer-nav a { color: rgba(255, 255, 255, .78); transition: color .2s ease; }
 .footer-nav a:hover { color: #fff; }
