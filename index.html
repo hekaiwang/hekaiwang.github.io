@@ -23,14 +23,16 @@
 <link rel="preload" href="assets/hero-phone-sunset.webp" as="image" media="(max-width: 760px), (max-aspect-ratio: 4/5)">
 <link rel="preload" href="assets/hero-ucas-gate.webp" as="image" media="(min-width: 761px) and (min-aspect-ratio: 4/5)">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="style.css?v=13">
-<script src="site.js?v=13" defer></script>
+<link rel="stylesheet" href="style.css?v=14">
+<script src="site.js?v=14" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
   <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
   <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
   <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
@@ -86,7 +88,15 @@
           <p class="hero-status"><span class="status-dot" aria-hidden="true"></span><span>Seeking PhD positions for Fall 2027</span><span class="hero-sep" aria-hidden="true">·</span><span class="hero-loc">Shenzhen, China</span></p>
         </div>
       </div>
-      <p class="hero-caption" aria-hidden="true">University of Chinese Academy of Sciences, Beijing</p>
+      <div class="hero-controls" role="group" aria-label="Campus photographs">
+        <p class="hero-caption">University of Chinese Academy of Sciences, Beijing</p>
+        <div class="hc-nav">
+          <button class="hc-btn" type="button" data-hero-step="-1" aria-label="Previous photograph"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <span class="hc-count" aria-live="polite"><span class="hc-now">1</span><span class="hc-sep">/</span><span class="hc-total">2</span></span>
+          <button class="hc-btn" type="button" data-hero-step="1" aria-label="Next photograph"><svg class="i" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+        <div class="hc-dots" role="group" aria-label="Choose photograph"></div>
+      </div>
     </div>
   </div>
 </section>

@@ -76,10 +76,15 @@
   addEventListener('resize', spy, { passive: true });
   spy();
 
-  /* Campus photographs: phones and desktops each cycle their own set with a slow cross-fade. */
+  /* Campus photographs: phones and desktops each have their own set. They cross-fade
+     automatically; arrows (desktop), dots and swipes (phones) move by hand. */
   if (hero) {
     const all = $$('.slide', hero);
     const caption = $('.hero-caption', hero);
+    const controls = $('.hero-controls', hero);
+    const nowEl = controls && $('.hc-now', controls);
+    const totalEl = controls && $('.hc-total', controls);
+    const dotsEl = controls && $('.hc-dots', controls);
     const compact = matchMedia('(max-width: 760px), (max-aspect-ratio: 4/5)');
     const imageOf = slide => (slide.tagName === 'IMG' ? slide : $('img', slide));
     const isReady = slide => { const img = imageOf(slide); return img.complete && img.naturalWidth > 0; };
@@ -90,43 +95,99 @@
     let heroVisible = true;
     let pageLoaded = document.readyState === 'complete';
     let captionTimer = 0;
+    let pending = null;
 
-    const hydrate = () => slides.forEach(slide => {
+    const hydrateOne = slide => {
       const img = imageOf(slide);
       if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-    });
+    };
     const setCaption = text => {
       if (!caption || !text || caption.textContent === text) return;
       clearTimeout(captionTimer);
       caption.classList.add('is-fading');
       captionTimer = setTimeout(() => { caption.textContent = text; caption.classList.remove('is-fading'); }, 450);
     };
+    const buildDots = () => {
+      if (!controls) return;
+      controls.hidden = slides.length < 2;
+      totalEl.textContent = String(slides.length);
+      dotsEl.innerHTML = slides.map((_, n) => `<button class="hc-dot" type="button" data-hero-go="${n}" aria-label="Photograph ${n + 1} of ${slides.length}"></button>`).join('');
+    };
+    const render = () => {
+      if (!controls) return;
+      nowEl.textContent = String(index + 1);
+      $$('.hc-dot', dotsEl).forEach((dot, n) => dot.setAttribute('aria-current', n === index ? 'true' : 'false'));
+    };
     const show = next => {
+      pending = null;
       all.forEach(slide => slide.classList.toggle('is-active', slide === slides[next]));
       index = next;
       setCaption(slides[index].dataset.caption);
+      render();
+    };
+    const restart = () => {
+      clearInterval(timer);
+      timer = 0;
+      if (!reduceMotion.matches && pageLoaded && heroVisible && !document.hidden && slides.length > 1) timer = setInterval(advance, 7000);
     };
     const advance = () => {
       const next = (index + 1) % slides.length;
       if (isReady(slides[next])) show(next);
     };
-    const sync = () => {
-      clearInterval(timer);
-      timer = 0;
-      if (reduceMotion.matches) { show(0); return; }
-      if (!pageLoaded || slides.length < 2) return;
-      hydrate();
-      if (heroVisible && !document.hidden) timer = setInterval(advance, 7000);
+    const goTo = next => {
+      if (slides.length < 2) return;
+      next = (next % slides.length + slides.length) % slides.length;
+      const slide = slides[next];
+      hydrateOne(slide);
+      pending = next;
+      if (isReady(slide)) show(next);
+      else imageOf(slide).addEventListener('load', () => { if (pending === next) show(next); }, { once: true });
+      restart();
     };
-    const reset = () => { slides = currentSet(); show(0); sync(); };
+    const sync = () => {
+      if (pageLoaded && !reduceMotion.matches) slides.forEach(hydrateOne);
+      restart();
+    };
+    const reset = () => { slides = currentSet(); buildDots(); show(0); sync(); };
+
+    if (controls) {
+      controls.addEventListener('click', event => {
+        const step = event.target.closest('[data-hero-step]');
+        const dot = event.target.closest('[data-hero-go]');
+        if (step) goTo(index + Number(step.dataset.heroStep));
+        else if (dot) goTo(Number(dot.dataset.heroGo));
+      });
+      controls.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(index - 1); }
+        if (event.key === 'ArrowRight') { event.preventDefault(); goTo(index + 1); }
+      });
+    }
+
+    /* Swipe: a mostly horizontal flick of 40px or more changes the photograph;
+       vertical movement is left to the page so scrolling is never blocked. */
+    let touchX = 0, touchY = 0, tracking = false;
+    hero.addEventListener('touchstart', event => {
+      if (event.touches.length !== 1) { tracking = false; return; }
+      touchX = event.touches[0].clientX; touchY = event.touches[0].clientY; tracking = true;
+    }, { passive: true });
+    hero.addEventListener('touchend', event => {
+      if (!tracking) return;
+      tracking = false;
+      const t = event.changedTouches[0];
+      const dx = t.clientX - touchX, dy = t.clientY - touchY;
+      if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy) * 1.3) goTo(index + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    hero.addEventListener('touchcancel', () => { tracking = false; }, { passive: true });
 
     addEventListener('load', () => { pageLoaded = true; sync(); }, { once: true });
-    document.addEventListener('visibilitychange', sync);
+    document.addEventListener('visibilitychange', restart);
     compact.addEventListener('change', reset);
-    reduceMotion.addEventListener('change', sync);
+    reduceMotion.addEventListener('change', restart);
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; sync(); }).observe(hero);
+      new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; restart(); }).observe(hero);
     }
+    buildDots();
+    render();
     sync();
   }
 

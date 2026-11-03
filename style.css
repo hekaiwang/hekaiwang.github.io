@@ -173,7 +173,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #9bd3a6; box-shadow: 0 0 0 3px rgba(155, 211, 166, .2); }
 .hero-sep { color: rgba(255, 255, 255, .5); font-weight: 400; }
 .hero-loc { font-weight: 400; color: rgba(255, 255, 255, .86); }
-.hero-caption { flex: none; margin-bottom: 2px; font-size: .78rem; letter-spacing: .03em; color: rgba(255, 255, 255, .68); text-align: right; transition: opacity .45s ease; }
+.hero-controls { display: none; }
+.js .hero-controls { display: flex; flex: none; flex-direction: column; align-items: flex-end; gap: 12px; }
+.js .hero-controls[hidden] { display: none; }
+.hero-caption { font-size: .78rem; letter-spacing: .03em; color: rgba(255, 255, 255, .7); text-align: right; transition: opacity .45s ease; }
+.hc-nav { display: flex; align-items: center; gap: 12px; }
+.hc-btn { display: inline-grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(255, 255, 255, .42); border-radius: 50%; background: rgba(12, 13, 16, .22); color: #fff; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: background-color .2s ease, border-color .2s ease, transform .2s var(--ease); }
+.hc-btn .i { width: 18px; height: 18px; stroke-width: 1.7; }
+.hc-btn:hover { background: rgba(255, 255, 255, .16); border-color: #fff; }
+.hc-btn:active { transform: scale(.94); }
+.hc-count { display: inline-flex; align-items: baseline; gap: 5px; min-width: 44px; justify-content: center; font-size: .85rem; font-weight: 600; letter-spacing: .04em; color: #fff; font-variant-numeric: tabular-nums; }
+.hc-sep, .hc-total { color: rgba(255, 255, 255, .55); font-weight: 500; }
+.hc-dots { display: none; }
+.hc-dot { position: relative; width: 26px; height: 32px; }
+.hc-dot::before { content: ""; position: absolute; left: 3px; right: 3px; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: rgba(255, 255, 255, .42); transition: background-color .3s ease; }
+.hc-dot[aria-current="true"]::before { background: #fff; }
+.hero-home { touch-action: pan-y pinch-zoom; }
 .hero-caption.is-fading { opacity: 0; }
 
 /* Sub-page photo band */
@@ -406,7 +421,10 @@ html.lb-lock { overflow: hidden; }
   .hero-home .slide-ginkgo { object-position: 36% 50%; }
   .hero-page .band-pubs img { object-position: 30% 40%; }
   .hero-page .band-xp img { object-position: 30% 30%; }
-  .hero-caption { display: none; }
+  .hero-caption, .hc-nav { display: none; }
+  .hc-dots { display: flex; gap: 2px; margin-right: -3px; }
+  .hero-home .hero-row { position: relative; }
+  .js .hero-home .hero-controls { position: absolute; right: var(--gutter); bottom: 0; }
   .hero-page { height: auto; min-height: 340px; }
   .hero-page .hero-inner { position: relative; padding-top: calc(var(--header-h) + 64px); }
 }
