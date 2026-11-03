@@ -21,7 +21,7 @@
   function showProject(id, trigger) {
     const p = window.RESEARCH_PROJECTS.find(item => item.id === id);
     if (!p) return;
-    body.innerHTML = `<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><div class="figure-tabs" role="group" aria-label="Choose research figure"><button type="button" data-figure="overview" aria-pressed="true">Method overview</button><button type="button" data-figure="results" aria-pressed="false">Results & evaluation</button></div><figure class="dialog-overview"><img id="dialog-figure" src="assets/${escape(p.overview_asset)}" alt="Method overview from ${escape(p.name)}"></figure><p class="figure-caption">Original method figure from the linked paper.</p><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 class="subheading">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c => `<li>${escape(c)}</li>`).join('')}</ul><h3 class="subheading">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">View repository ↗</a><button type="button" class="citation-button" data-citation="${escape(p.id)}">Copy citation</button></div>`;
+    body.innerHTML = `<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><div class="figure-tabs" role="group" aria-label="Choose research figure"><button type="button" data-figure="overview" aria-pressed="true">Method overview</button><button type="button" data-figure="results" aria-pressed="false">Results & evaluation</button></div><figure class="dialog-overview"><img id="dialog-figure" src="assets/${escape(p.overview_asset)}" alt="Method overview from ${escape(p.name)}"></figure><p class="figure-caption">Original method figure from the linked paper.</p><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 class="subheading">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c => `<li>${escape(c)}</li>`).join('')}</ul><h3 class="subheading">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">View repository ↗</a><button type="button" class="citation-button" data-citation="${escape(p.id)}">BibTeX</button></div>`;
     body.querySelectorAll('[data-figure]').forEach(button => button.addEventListener('click', () => {
       const kind = button.dataset.figure;
       body.querySelectorAll('[data-figure]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
@@ -32,23 +32,34 @@
     }));
     openDialog(trigger);
   }
-  async function copyCitation(id, trigger) {
+  function showCitation(id, trigger) {
+    const citation = window.RESEARCH_CITATIONS[id];
+    if (!citation) return;
+    const title = window.RESEARCH_PROJECTS.find(item => item.id === id)?.title || 'Beyond the Best Guess: Source-Identifiable Candidate Support Learning for Cross-Modal Medical Image Synthesis';
+    body.innerHTML = `<p class="dialog-eyebrow">Citation</p><h2 class="dialog-title" id="dialog-title">BibTeX</h2><p class="dialog-paper-title">${escape(title)}</p><textarea class="citation-fallback" aria-label="BibTeX citation" readonly></textarea><div class="dialog-links"><button type="button" data-copy-citation="${escape(id)}">Copy BibTeX</button><a class="citation-download" download="${escape(id)}.bib">Download .bib ↗</a></div>`;
+    const field = body.querySelector('textarea');
+    field.value = citation;
+    body.querySelector('.citation-download').href = 'data:application/x-bibtex;charset=utf-8,' + encodeURIComponent(citation);
+    openDialog(trigger); field.focus(); field.select();
+  }
+  async function copyCitation(id) {
     const citation = window.RESEARCH_CITATIONS[id];
     if (!citation) return;
     try {
       await navigator.clipboard.writeText(citation);
       notify('BibTeX citation copied.');
     } catch {
-      body.innerHTML = '<p class="dialog-eyebrow">BIBTEX</p><h2 class="dialog-title" id="dialog-title">Copy citation</h2><p class="dialog-paper-title">Select and copy the citation below.</p><textarea class="citation-fallback" aria-label="BibTeX citation" readonly></textarea>';
-      body.querySelector('textarea').value = citation;
-      openDialog(trigger); body.querySelector('textarea').focus(); body.querySelector('textarea').select();
+      const field = body.querySelector('.citation-fallback');
+      field.focus(); field.select();
+      notify('Select and copy the citation, or download the .bib file.');
     }
   }
   document.addEventListener('click', event => {
-    const trigger = event.target.closest('[data-project], [data-citation]');
+    const trigger = event.target.closest('[data-project], [data-citation], [data-copy-citation]');
     if (!trigger) return;
     if (trigger.dataset.project) showProject(trigger.dataset.project, trigger);
-    else copyCitation(trigger.dataset.citation, trigger);
+    else if (trigger.dataset.citation) showCitation(trigger.dataset.citation, trigger);
+    else copyCitation(trigger.dataset.copyCitation);
   });
   document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
