@@ -59,9 +59,9 @@
   dialog.addEventListener('close', () => { document.body.style.overflow = ''; if (lastTrigger?.isConnected) lastTrigger.focus(); });
 
   const showcase = [
-    {image:'segmentation.webp',alt:'Multi-organ abdominal MRI segmentation examples from AP-Mamba',topic:'ANATOMY-AWARE UNDERSTANDING',title:'Structure makes a difference.',description:'Learning organ relationships and refining boundaries in abdominal MRI.',project:'ap-mamba',name:'AP-Mamba'},
-    {image:'synthesis.webp',alt:'MRI synthesis examples from PriorFM',topic:'LEARNING WITH INCOMPLETE INPUTS',title:'Recover the missing contrast.',description:'Using observed anatomy to guide missing-modality MRI synthesis.',project:'prior-flow',name:'PriorFM'},
-    {image:'review.webp',alt:'Anatomical retention and report review framework from OA-CXR',topic:'IMAGE–LANGUAGE CONSISTENCY',title:'Keep the evidence in view.',description:'Connecting retained anatomy with statements that warrant report review.',project:'oa-cxr',name:'OA-CXR'}
+    {image:'segmentation.webp',alt:'Multi-organ abdominal MRI segmentation examples from AP-Mamba',topic:'AP-Mamba · Abdominal MRI',title:'Anatomy-aware segmentation.',description:'Learning organ relationships and refining boundaries in abdominal MRI.',project:'ap-mamba',name:'AP-Mamba'},
+    {image:'synthesis.webp',alt:'MRI synthesis examples from PriorFM',topic:'PriorFM · Missing modalities',title:'Recovering missing MRI contrasts.',description:'Using observed anatomy to guide missing-modality MRI synthesis.',project:'prior-flow',name:'PriorFM'},
+    {image:'review.webp',alt:'Anatomical retention and report review framework from OA-CXR',topic:'OA-CXR · Image–language consistency',title:'Image-grounded report review.',description:'Connecting retained anatomy with statements that warrant report review.',project:'oa-cxr',name:'OA-CXR'}
   ];
   document.querySelectorAll('[data-showcase]').forEach(button => button.addEventListener('click', () => {
     const i = Number(button.dataset.showcase), item = showcase[i];
@@ -72,8 +72,50 @@
     document.querySelector('#showcase-description').textContent = item.description;
     document.querySelector('.showcase-counter').textContent = `0${i+1} / 03`;
     const link = document.querySelector('.showcase-link'); link.dataset.project = item.project; link.innerHTML = `Explore ${escape(item.name)} <span aria-hidden="true">↗</span>`;
+    const imageButton = document.querySelector('.showcase-window');
+    imageButton.dataset.project = item.project;
+    imageButton.setAttribute('aria-label', `Open ${item.name} research details`);
     if (!reducedMotion && img.animate) img.animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:330,easing:'cubic-bezier(.2,.7,.2,1)'});
   }));
+
+  const gallery = document.querySelector('#research-gallery');
+  const galleryButtons = [...document.querySelectorAll('[data-gallery]')];
+  function syncGallery() {
+    const end = Math.max(0, gallery.scrollWidth - gallery.clientWidth);
+    galleryButtons.forEach(button => {
+      button.disabled = button.dataset.gallery === 'prev' ? gallery.scrollLeft < 4 : gallery.scrollLeft >= end - 4;
+    });
+  }
+  function moveGallery(direction) {
+    const card = gallery.querySelector('.project-card');
+    const gap = parseFloat(getComputedStyle(gallery).columnGap) || 24;
+    gallery.scrollBy({left: direction * (card.getBoundingClientRect().width + gap), behavior: reducedMotion ? 'auto' : 'smooth'});
+  }
+  galleryButtons.forEach(button => button.addEventListener('click', () => moveGallery(button.dataset.gallery === 'prev' ? -1 : 1)));
+  gallery.addEventListener('scroll', syncGallery, {passive:true});
+  gallery.addEventListener('keydown', event => {
+    if (event.target === gallery && ['ArrowLeft','ArrowRight'].includes(event.key)) {
+      event.preventDefault(); moveGallery(event.key === 'ArrowLeft' ? -1 : 1);
+    }
+  });
+  if ('ResizeObserver' in window) new ResizeObserver(syncGallery).observe(gallery);
+  window.addEventListener('resize', syncGallery, {passive:true});
+  syncGallery();
+
+  const header = document.querySelector('.header');
+  const menuToggle = document.querySelector('.menu-toggle');
+  function setMenu(open) {
+    header.classList.toggle('menu-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  }
+  menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+  header.querySelectorAll('nav a, .brand').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('click', event => { if (!header.contains(event.target)) setMenu(false); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') { setMenu(false); menuToggle.focus(); }
+  });
+  window.matchMedia('(min-width:741px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
 
   const filters = [...document.querySelectorAll('[data-filter]')];
   const publications = [...document.querySelectorAll('.publication')];
@@ -105,7 +147,7 @@
     theme.setAttribute('aria-pressed', String(dark));
     theme.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     theme.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
-    document.querySelector('meta[name="theme-color"]').content = dark ? '#101724' : '#f8faff';
+    document.querySelector('meta[name="theme-color"]').content = dark ? '#101010' : '#ffffff';
   }
   theme.addEventListener('click', () => {
     root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
