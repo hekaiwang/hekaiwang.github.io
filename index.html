@@ -1,33 +1,253 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hekai Wang — Medical Imaging & Machine Learning</title><meta name="description" content="Hekai Wang is a master's student at UCAS and a researcher at SIAT, CAS, working on anatomy-guided medical image segmentation, synthesis and image–language consistency."><meta name="theme-color" content="#ffffff"><link rel="canonical" href="https://hekaiwang.github.io/"><meta property="og:url" content="https://hekaiwang.github.io/"><meta property="og:image" content="https://hekaiwang.github.io/assets/research-overview-preview.webp"><script>try{document.documentElement.dataset.theme=localStorage.getItem("hekai-theme")||"light"}catch(e){}</script><meta property="og:title" content="Hekai Wang — Medical Imaging & Machine Learning"><meta property="og:description" content="Anatomy-guided learning for incomplete and heterogeneous medical images."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preload" href="assets/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="style.css?v=5.1"><script src="projects.js?v=6" defer></script><script src="site.js?v=6" defer></script></head>
-<body><a class="skip" href="#main">Skip to content</a><header class="header"><div class="header-inner">
-<a class="brand" href="#about" aria-label="Hekai Wang home">Hekai Wang</a>
-<nav id="main-nav" aria-label="Main navigation"><a href="#about" aria-current="location">About</a><a href="#research">Research</a><a href="#publications">Publications</a><a href="#background">Background</a></nav>
-<div class="header-actions"><a class="nav-contact" href="mailto:hk.wang2@siat.ac.cn">Email me</a>
-<button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch theme"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor"/></svg></button>
-<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg></button></div></div></header>
-<main id="main"><section id="about" class="profile-hero" aria-labelledby="profile-name">
-<div class="campus-backdrop" aria-hidden="true"><img class="campus-scene is-active" data-scene="0" src="assets/campus-ucas.webp" alt="" width="2000" height="1333" fetchpriority="high"><img class="campus-scene" data-scene="1" src="assets/campus-siat.webp" alt="" width="2000" height="654" decoding="async"><div class="campus-wash"></div></div>
-<div class="campus-toolbar wrap"><div class="campus-switcher" role="group" aria-label="Campus background"><button type="button" data-campus="0" aria-pressed="true">UCAS <span>Beijing</span></button><button type="button" data-campus="1" aria-pressed="false">SIAT <span>Shenzhen</span></button><button type="button" class="campus-pause" aria-label="Pause campus slideshow" aria-pressed="false" title="Pause campus slideshow"><svg class="pause-symbol" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M7 5v10M13 5v10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><svg class="play-symbol" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg></button></div><span class="campus-caption" id="campus-caption">UCAS · Yanqihu campus</span></div>
-<div class="profile-main wrap"><div class="profile-heading"><p class="eyebrow">Medical imaging &amp; machine learning</p><h1 id="profile-name">Hekai Wang</h1><p class="profile-statement">Learning from<br>incomplete information.</p></div>
-<div class="profile-details"><p class="profile-bio">Master’s student at the <a href="https://www.ucas.ac.cn/" target="_blank" rel="noopener">University of Chinese Academy of Sciences</a>.<br>Research at <a href="https://www.siat.ac.cn/" target="_blank" rel="noopener">SIAT, Chinese Academy of Sciences</a>.</p><div class="profile-actions"><a class="button dark" href="#research">Explore research <span aria-hidden="true">↓</span></a><a class="button text" href="mailto:hk.wang2@siat.ac.cn">Email me <span aria-hidden="true">↗</span></a></div><p class="profile-availability"><span class="availability-dot" aria-hidden="true"></span><strong>Open to PhD opportunities</strong><span class="profile-location">Shenzhen, China</span></p></div>
-<figure class="profile-portrait"><div class="portrait-frame"><img src="assets/hekai-wang-portrait.webp" alt="Portrait of Hekai Wang" width="900" height="1200" fetchpriority="high"></div><figcaption><span>Graduate student researcher</span><span>SIAT, Chinese Academy of Sciences</span></figcaption></figure></div>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hekai Wang — Medical Image Analysis</title>
+<meta name="description" content="Hekai Wang is an M.S. student at the University of Chinese Academy of Sciences and a graduate researcher at SIAT, CAS, working on anatomy-guided medical image analysis. Seeking PhD positions for Fall 2027.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://hekaiwang.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hekaiwang.github.io/">
+<meta property="og:title" content="Hekai Wang — Medical Image Analysis">
+<meta property="og:description" content="Hekai Wang is an M.S. student at the University of Chinese Academy of Sciences and a graduate researcher at SIAT, CAS, working on anatomy-guided medical image analysis. Seeking PhD positions for Fall 2027.">
+<meta property="og:image" content="https://hekaiwang.github.io/assets/research-overview-preview.webp">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/hero-phone-sunset.webp" as="image" media="(max-width: 760px), (max-aspect-ratio: 4/5)">
+<link rel="preload" href="assets/hero-ucas-gate.webp" as="image" media="(min-width: 761px) and (min-aspect-ratio: 4/5)">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="style.css?v=10">
+<script src="site.js?v=10" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10M18 9c0 5-6 4-11 8.5"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#top">Hekai Wang</a>
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="#top" aria-current="page">Home</a>
+      <a href="publications.html">Publications</a>
+      <a href="experience.html">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav"><span class="label">Menu</span><span class="menu-icon" aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero hero-home" id="top" aria-label="Introduction">
+  <div class="hero-media" aria-hidden="true">
+    <picture class="slide slide-first is-active" data-caption="University of Chinese Academy of Sciences, Beijing">
+      <source media="(max-width: 760px), (max-aspect-ratio: 4/5)" srcset="assets/hero-phone-sunset.webp" width="1170" height="1620">
+      <img src="assets/hero-ucas-gate.webp" alt="" width="2576" height="1096" fetchpriority="high" decoding="async">
+    </picture>
+    <img class="slide slide-aerial only-desk" data-src="assets/hero-ucas-aerial.webp" data-caption="University of Chinese Academy of Sciences, Beijing" alt="" width="2560" height="1707" decoding="async">
+    <img class="slide slide-night only-phone" data-src="assets/hero-phone-night.webp" alt="" width="1170" height="1755" decoding="async">
+    <img class="slide slide-ginkgo only-phone" data-src="assets/hero-phone-ginkgo.webp" alt="" width="1170" height="1796" decoding="async">
+  </div>
+  <div class="hero-inner">
+    <div class="wrap hero-row">
+      <div class="hero-text">
+        <p class="hero-kicker">Medical image analysis · MRI</p>
+        <h1>Hekai Wang</h1>
+        <p class="hero-lede">Anatomy-guided learning for incomplete and heterogeneous medical images.</p>
+        <div class="hero-actions">
+          <a class="hbtn hbtn-solid" href="publications.html">Publications<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="hbtn" href="#contact">Get in touch</a>
+        </div>
+        <div class="hero-foot">
+          <ul class="hero-meta">
+            <li>M.S. student, University of Chinese Academy of Sciences</li>
+            <li>Graduate researcher, SIAT, Chinese Academy of Sciences</li>
+          </ul>
+          <p class="hero-status"><span class="status-dot" aria-hidden="true"></span><span>Seeking PhD positions for Fall 2027</span><span class="hero-sep" aria-hidden="true">·</span><span class="hero-loc">Shenzhen, China</span></p>
+        </div>
+      </div>
+      <p class="hero-caption" aria-hidden="true">University of Chinese Academy of Sciences, Beijing</p>
+    </div>
+  </div>
 </section>
-<section class="research-lens wrap" aria-labelledby="lens-title"><div class="lens-label"><span class="eyebrow">About my research</span><h2 id="lens-title">Anatomy-guided <br>medical imaging.</h2></div><div class="lens-text">
-<p>I conduct research at the <strong>Paul C. Lauterbur Research Center for Biomedical Imaging, SIAT, CAS</strong>, advised by <strong>Prof. Haifeng Wang</strong> and <strong>Prof. Dong Liang</strong>.</p>
-<p>I study how anatomical structure can guide segmentation, synthesis, and image–language analysis when medical images are incomplete or heterogeneous.</p>
-<p>Across these settings, I am interested in <strong>anatomical priors, modality-aware representations, and explicit evidence</strong>: how much information is available, and how a model should use it.</p>
-</div></section>
-<section id="research" class="research-section wrap"><div class="section-title"><div><span class="eyebrow">Selected research</span><h2>A closer look.</h2></div><div class="gallery-heading"><p>Five projects in medical image analysis.</p><div class="gallery-controls" role="group" aria-label="Browse research projects"><button type="button" data-gallery="prev" aria-label="Previous research projects" aria-controls="research-gallery" disabled>←</button><button type="button" data-gallery="next" aria-label="Next research projects" aria-controls="research-gallery">→</button></div></div></div><div class="project-grid" id="research-gallery" role="region" aria-label="Selected research gallery" tabindex="0"><article class="project-card" id="project-reliss"><button class="project-visual" data-project="reliss" aria-label="Explore ReLiSS research poster"><span class="visual-label">01 / ADAPTIVE SEGMENTATION</span><img src="assets/reliss-architecture.png" alt="ReLiSS architecture: modality conditioning, CNN–Mamba encoder, FiLM, and evidential learning" loading="lazy" width="4463" height="2497"><span class="expand-mark" aria-hidden="true">↗</span></button><div class="project-copy"><div class="project-meta"><span>ReLiSS</span><span class="status review">Under review · IEEE TMI</span></div><h3>Modality-adaptive MRI segmentation.</h3><p>Adaptive spatial–spectral conditioning and evidential regularization support 3D brain-lesion segmentation when MRI modalities are missing.</p><div class="project-links"><button class="inline-link" data-project="reliss">Explore the work ↗</button><a href="papers/reliss.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="https://github.com/hekaiwang/ReLiSS" target="_blank" rel="noopener">Repository ↗</a></div></div></article>
-<article class="project-card" id="project-prior-flow"><button class="project-visual" data-project="prior-flow" aria-label="Explore PriorFM research poster"><span class="visual-label">02 / MISSING-MODALITY SYNTHESIS</span><img src="assets/prior-flow-overview.webp" alt="PriorFM: figure from the research paper" loading="lazy" width="800" height="340"><span class="expand-mark" aria-hidden="true">↗</span></button><div class="project-copy"><div class="project-meta"><span>PriorFM</span><span class="status accepted">Accepted · BIBM · Oral</span></div><h3>Anatomy-guided MRI synthesis.</h3><p>Task-conditioned anatomical priors and flow matching synthesize missing MRI sequences from arbitrary available modality subsets with a short deterministic refinement path.</p><div class="project-links"><button class="inline-link" data-project="prior-flow">Explore the work ↗</button><a href="papers/prior-flow.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="https://github.com/hekaiwang/PriorFM" target="_blank" rel="noopener">Repository ↗</a></div></div></article>
-<article class="project-card" id="project-ap-mamba"><button class="project-visual" data-project="ap-mamba" aria-label="Explore AP-Mamba research poster"><span class="visual-label">03 / ANATOMY-AWARE REPRESENTATIONS</span><img src="assets/ap-mamba-results.webp" alt="AP-Mamba: figure from the research paper" loading="lazy" width="800" height="340"><span class="expand-mark" aria-hidden="true">↗</span></button><div class="project-copy"><div class="project-meta"><span>AP-Mamba</span><span class="status accepted">Accepted · EMBC 2026 · Oral</span></div><h3>Anatomy-aware organ segmentation.</h3><p>An anatomy-aware state-space network combines global organ-layout priors with attention-gated decoding for multi-organ abdominal MRI segmentation.</p><div class="project-links"><button class="inline-link" data-project="ap-mamba">Explore the work ↗</button><a href="papers/ap-mamba.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="https://github.com/hekaiwang/AP-MAMBA" target="_blank" rel="noopener">Repository ↗</a></div></div></article>
-<article class="project-card" id="project-upath"><button class="project-visual" data-project="upath" aria-label="Explore UPath-X2CT research poster"><span class="visual-label">04 / CROSS-MODAL RECONSTRUCTION</span><img src="assets/upath-overview.webp" alt="UPath-X2CT: figure from the research paper" loading="lazy" width="800" height="340"><span class="expand-mark" aria-hidden="true">↗</span></button><div class="project-copy"><div class="project-meta"><span>UPath-X2CT</span><span class="status review">Under review</span></div><h3>From biplanar X-rays to 3D CT.</h3><p>Calibrated geometric lifting aligns biplanar X-ray features in 3D, while residual latent diffusion refines a coarse chest CT reconstruction.</p><div class="project-links"><button class="inline-link" data-project="upath">Explore the work ↗</button><a href="papers/upath.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="https://github.com/hekaiwang/UPath-X2CT" target="_blank" rel="noopener">Repository ↗</a></div></div></article>
-<article class="project-card" id="project-oa-cxr"><button class="project-visual" data-project="oa-cxr" aria-label="Explore OA-CXR research poster"><span class="visual-label">05 / IMAGE–LANGUAGE CONSISTENCY</span><img src="assets/oa-cxr-overview.webp" alt="OA-CXR: figure from the research paper" loading="lazy" width="800" height="340"><span class="expand-mark" aria-hidden="true">↗</span></button><div class="project-copy"><div class="project-meta"><span>OA-CXR</span><span class="status review">Under review · ESWA</span></div><h3>Anatomical evidence for report review.</h3><p>Source-relative anatomical retention provides an image-grounded signal for prioritizing generated chest-radiograph reports for review.</p><div class="project-links"><button class="inline-link" data-project="oa-cxr">Explore the work ↗</button><a href="papers/oa-cxr.pdf" target="_blank" rel="noopener">Paper ↗</a><a href="https://github.com/hekaiwang/OA-CXR" target="_blank" rel="noopener">Repository ↗</a></div></div></article></div><a class="poster-banner" href="assets/hekai-wang-research-overview.pdf?v=5" target="_blank" rel="noopener"><div><span class="eyebrow">Research overview</span><h3>Anatomy as a bridge</h3><p>A visual research overview connecting the questions behind these projects.</p><span class="poster-link">Open research poster · PDF ↗</span></div><img src="assets/research-overview-preview.webp?v=5" loading="lazy" width="1200" height="933" alt="Hekai Wang's research overview poster"></a></section>
-<section id="publications" class="publications-section wrap"><div class="section-title"><div><span class="eyebrow">Publications & manuscripts</span><h2>Publications.</h2></div><div class="publication-tools"><label class="search-box"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="paper-search" type="search" placeholder="Search publications" aria-label="Search publications" autocomplete="off"></label><div class="filters" role="group" aria-label="Filter publications"><button class="selected" data-filter="all" aria-pressed="true">All</button><button data-filter="accepted" aria-pressed="false">Accepted</button><button data-filter="review" aria-pressed="false">Under review</button><button data-filter="manuscript" aria-pressed="false">Manuscripts</button></div></div></div><p class="filter-count" aria-live="polite">8 selected works</p><div class="publication-list"><article class="publication" data-status="review" data-search="reliss: modality-adaptive representation conditioning for multimodal mri segmentation under arbitrary modality availability hekai wang zhenrong he haobo wang jinxuan lv yanjie zhu yihang zhou dong liang zhanqi hu haifeng wang adaptive spatial–spectral conditioning and evidential regularization support 3d brain-lesion segmentation when mri modalities are missing. availability-gated spectral conditioning drives input attenuation, fusion, and multiscale film large-kernel cnn–mamba encoder and unetr-style decoder task-matched evidential learning and nested-view ranking regularize uncertainty without added learned inference branches"><button class="pub-thumbnail" type="button" data-project="reliss" aria-label="Open ReLiSS research details"><img src="assets/reliss-architecture.png" alt="Updated ReLiSS architecture" loading="lazy" width="4463" height="2497"></button><div><p class="pub-status review">Under review · IEEE TMI</p><h3><a href="papers/reliss.pdf" target="_blank" rel="noopener">ReLiSS: Modality-Adaptive Representation Conditioning for Multimodal MRI Segmentation under Arbitrary Modality Availability</a></h3><p class="authors"><strong>Hekai Wang</strong>, Zhenrong He, Haobo Wang, Jinxuan Lv, Yanjie Zhu, Yihang Zhou, Dong Liang, Zhanqi Hu, Haifeng Wang</p><p class="pub-summary">Adaptive spatial–spectral conditioning and evidential regularization support 3D brain-lesion segmentation when MRI modalities are missing.</p><div class="pub-links"><a href="papers/reliss.pdf" target="_blank" rel="noopener">PDF ↗</a><a href="https://github.com/hekaiwang/ReLiSS" target="_blank" rel="noopener">Repository ↗</a><button data-project="reliss">Research summary ↗</button><button class="citation-button" type="button" data-citation="reliss" aria-label="View BibTeX citation for ReLiSS">BibTeX</button></div></div></article>
-<article class="publication" data-status="accepted" data-search="prior-guided flow matching for missing modality mri synthesis hekai wang zhenrong he xingyang wu yihang zhou dong liang haifeng wang task-conditioned anatomical priors and flow matching synthesize missing mri sequences from arbitrary available modality subsets with a short deterministic refinement path. task-aware masked fusion constructs target-specific anatomical priors conditional flow refinement combines prior context with haar-wavelet frequency guidance one model per dataset supports multiple source–target configurations"><button class="pub-thumbnail" type="button" data-project="prior-flow" aria-label="Open PriorFM research details"><img src="assets/prior-flow-overview.webp" alt="Research figure from PriorFM" loading="lazy" width="240" height="150"></button><div><p class="pub-status accepted">Accepted · BIBM · Oral</p><h3><a href="papers/prior-flow.pdf" target="_blank" rel="noopener">Prior-Guided Flow Matching for Missing Modality MRI Synthesis</a></h3><p class="authors"><strong>Hekai Wang</strong>, Zhenrong He, Xingyang Wu, Yihang Zhou, Dong Liang, Haifeng Wang</p><p class="pub-summary">Task-conditioned anatomical priors and flow matching synthesize missing MRI sequences from arbitrary available modality subsets with a short deterministic refinement path.</p><div class="pub-links"><a href="papers/prior-flow.pdf" target="_blank" rel="noopener">PDF ↗</a><a href="https://github.com/hekaiwang/PriorFM" target="_blank" rel="noopener">Repository ↗</a><button data-project="prior-flow">Research summary ↗</button><button class="citation-button" type="button" data-citation="prior-flow" aria-label="View BibTeX citation for PriorFM">BibTeX</button></div></div></article>
-<article class="publication" data-status="accepted" data-search="ap-mamba: anatomy-aware state space models for multi-organ abdominal mri segmentation hekai wang xingyang wu isah salim ahmad shuo zhou zhao liao caijin zhou yihang zhou dong liang zhanqi hu haifeng wang an anatomy-aware state-space network combines global organ-layout priors with attention-gated decoding for multi-organ abdominal mri segmentation. visual state-space backbone for efficient long-range context anatomical prior module encodes global organ layout and co-occurrence attention-gated skip connections refine boundaries and suppress background responses"><button class="pub-thumbnail" type="button" data-project="ap-mamba" aria-label="Open AP-Mamba research details"><img src="assets/ap-mamba-results.webp" alt="Research figure from AP-Mamba" loading="lazy" width="240" height="150"></button><div><p class="pub-status accepted">Accepted · EMBC 2026 · Oral</p><h3><a href="papers/ap-mamba.pdf" target="_blank" rel="noopener">AP-Mamba: Anatomy-Aware State Space Models for Multi-organ Abdominal MRI Segmentation</a></h3><p class="authors"><strong>Hekai Wang</strong>, Xingyang Wu, Isah Salim Ahmad, Shuo Zhou, Zhao Liao, Caijin Zhou, Yihang Zhou, Dong Liang, Zhanqi Hu, Haifeng Wang</p><p class="pub-summary">An anatomy-aware state-space network combines global organ-layout priors with attention-gated decoding for multi-organ abdominal MRI segmentation.</p><div class="pub-links"><a href="papers/ap-mamba.pdf" target="_blank" rel="noopener">PDF ↗</a><a href="https://github.com/hekaiwang/AP-MAMBA" target="_blank" rel="noopener">Repository ↗</a><button data-project="ap-mamba">Research summary ↗</button><button class="citation-button" type="button" data-citation="ap-mamba" aria-label="View BibTeX citation for AP-Mamba">BibTeX</button></div></div></article>
-<article class="publication" id="publication-atlantis" data-status="accepted" data-search="atlantis atlantis: an anatomy-guided tissue-latent atlas network for dwi-derived white-matter anisotropy synthesis from t1w mri zhenrong he bin zhang hekai wang shuo zhou xingyang wu lixian zou yihang zhou haifeng wang atlantis synthesizes fractional anisotropy (fa) maps from t1-weighted mri using tissue-guided attention, anatomy-aware restoration, and adaptive fusion. evaluation on 97 hcp young adult test subjects examines both image fidelity and the preservation of mean fa across eight jhu white-matter tracts."><button class="pub-thumbnail" type="button" data-project="atlantis" aria-label="Open ATLANTIS research details"><img src="assets/atlantis-overview.webp" alt="ATLANTIS anatomy-guided FA synthesis architecture" loading="lazy" width="240" height="150"></button><div><p class="pub-status accepted">Accepted · BHI · Oral</p><h3><a href="papers/atlantis.pdf" target="_blank" rel="noopener">ATLANTIS: An Anatomy-guided Tissue-Latent Atlas Network for DWI-derived White-Matter Anisotropy Synthesis from T1w MRI</a></h3><p class="authors">Zhenrong He, Bin Zhang, <strong>Hekai Wang</strong>, Shuo Zhou, Xingyang Wu, Lixian Zou, Yihang Zhou, Haifeng Wang</p><p class="pub-summary">ATLANTIS synthesizes fractional anisotropy (FA) maps from T1-weighted MRI using tissue-guided attention, anatomy-aware restoration, and adaptive fusion. Evaluation on 97 HCP Young Adult test subjects examines both image fidelity and the preservation of mean FA across eight JHU white-matter tracts.</p><div class="pub-links"><a href="papers/atlantis.pdf" target="_blank" rel="noopener">PDF ↗</a><button data-project="atlantis">Research summary ↗</button><button class="citation-button" type="button" data-citation="atlantis" aria-label="View BibTeX citation for ATLANTIS">BibTeX</button></div></div></article>
-<article class="publication" data-status="review" data-search="upath-x2ct geometry-aware biplanar chest ct reconstruction with residual latent diffusion hekai wang zhenrong he shengran fan xingyang wu caijin zhou yihang zhou dong liang zhanqi hu haifeng wang calibrated geometric lifting aligns biplanar x-ray features in 3d, while residual latent diffusion refines a coarse chest ct reconstruction. geometry-aware multiscale lifting and adaptive feature fusion deterministic coarse latent prediction followed by conditional residual diffusion decoded sample averaging for final reconstruction"><button class="pub-thumbnail" type="button" data-project="upath" aria-label="Open UPath-X2CT research details"><img src="assets/upath-overview.webp" alt="Research figure from UPath-X2CT" loading="lazy" width="240" height="150"></button><div><p class="pub-status review">Under review</p><h3><a href="papers/upath.pdf" target="_blank" rel="noopener">Geometry-Aware Biplanar Chest CT Reconstruction with Residual Latent Diffusion</a></h3><p class="authors"><strong>Hekai Wang</strong>, Zhenrong He, Shengran Fan, Xingyang Wu, Caijin Zhou, Yihang Zhou, Dong Liang, Zhanqi Hu, Haifeng Wang</p><p class="pub-summary">Calibrated geometric lifting aligns biplanar X-ray features in 3D, while residual latent diffusion refines a coarse chest CT reconstruction.</p><div class="pub-links"><a href="papers/upath.pdf" target="_blank" rel="noopener">PDF ↗</a><a href="https://github.com/hekaiwang/UPath-X2CT" target="_blank" rel="noopener">Repository ↗</a><button data-project="upath">Research summary ↗</button><button class="citation-button" type="button" data-citation="upath" aria-label="View BibTeX citation for UPath-X2CT">BibTeX</button></div></div></article>
-<article class="publication" data-status="review" data-search="oa-cxr: an anatomical retention-guided system for selective chest radiograph report review hekai wang zhenrong he shengran fan qiang zhang yaxin cai shuyuan chen caijin zhou xingyang wu shuo zhou xin liu yihang zhou zhanqi hu haifeng wang source-relative anatomical retention provides an image-grounded signal for prioritizing generated chest-radiograph reports for review. two-stage global–regional model estimates retained anatomical information fixed parser maps eligible report statements to anatomical queries statement-level flags and fixed-budget report prioritization connect retention to review"><button class="pub-thumbnail" type="button" data-project="oa-cxr" aria-label="Open OA-CXR research details"><img src="assets/oa-cxr-overview.webp" alt="Research figure from OA-CXR" loading="lazy" width="240" height="150"></button><div><p class="pub-status review">Under review · ESWA</p><h3><a href="papers/oa-cxr.pdf" target="_blank" rel="noopener">OA-CXR: An Anatomical Retention-Guided System for Selective Chest Radiograph Report Review</a></h3><p class="authors"><strong>Hekai Wang</strong>, Zhenrong He, Shengran Fan, Qiang Zhang, Yaxin Cai, Shuyuan Chen, Caijin Zhou, Xingyang Wu, Shuo Zhou, Xin Liu, Yihang Zhou, Zhanqi Hu, Haifeng Wang</p><p class="pub-summary">Source-relative anatomical retention provides an image-grounded signal for prioritizing generated chest-radiograph reports for review.</p><div class="pub-links"><a href="papers/oa-cxr.pdf" target="_blank" rel="noopener">PDF ↗</a><a href="https://github.com/hekaiwang/OA-CXR" target="_blank" rel="noopener">Repository ↗</a><button data-project="oa-cxr">Research summary ↗</button><button class="citation-button" type="button" data-citation="oa-cxr" aria-label="View BibTeX citation for OA-CXR">BibTeX</button></div></div></article>
-<article class="publication" data-status="review" data-search=" 06   under review · aaai · equal contribution  beyond the best guess: source-identifiable candidate support learning for cross-modal medical image synthesis  zhenrong he*,  hekai wang* , xingyang wu, lixian zou, yihang zhou, haifeng wang.  * equal contribution   copy citation   "><span class="pub-index">07</span><div><p class="pub-status review">Under review · AAAI · Equal contribution</p><h3>Beyond the Best Guess: Source-Identifiable Candidate Support Learning for Cross-Modal Medical Image Synthesis</h3><p class="authors">Zhenrong He*, <strong>Hekai Wang*</strong>, Xingyang Wu, Lixian Zou, Yihang Zhou, Haifeng Wang.</p><p class="equal-note">* Equal contribution</p><div class="pub-links"><button class="citation-button" type="button" data-citation="beyond-best-guess" aria-label="View BibTeX citation for Beyond the Best Guess">BibTeX</button></div></div></article><article class="publication" data-status="manuscript" data-search="anatotextseg multi-organ segmentation guided by structured anatomical text manuscript"><span class="pub-index">08</span><div><p class="pub-status manuscript">Manuscript</p><h3>AnatoTextSeg</h3><p class="pub-summary">Multi-organ segmentation guided by structured anatomical text.</p></div></article></div><p class="empty-search" hidden>No matching papers. Try another search or filter.</p></section>
-<section id="background" class="background-section wrap"><div class="section-title"><div><span class="eyebrow">Background</span><h2>Education & research.</h2></div></div><div class="background-grid"><div><h3 class="small-heading">EDUCATION</h3><article class="timeline-entry"><span class="timeline-date">2024 — 2027 <small>EXPECTED JUNE 2027</small></span><h3>University of Chinese Academy of Sciences</h3><p>M.S. in Computer Technology</p><p class="minor">Beijing / Shenzhen, China</p></article><article class="timeline-entry"><span class="timeline-date">2019 — 2023</span><h3>Hubei University of Technology</h3><p>B.E. in Mechanical Engineering</p><p class="minor">Wuhan, China</p></article></div><div><h3 class="small-heading">RESEARCH APPOINTMENT</h3><article class="timeline-entry"><span class="timeline-date">2024 — PRESENT</span><h3>Graduate Student Research Assistant</h3><p>Shenzhen Institutes of Advanced Technology<br>Chinese Academy of Sciences</p><p class="minor">Paul C. Lauterbur Research Center<br>for Biomedical Imaging</p><p class="advisors">Advised by <strong>Prof. Haifeng Wang</strong><br>and <strong>Prof. Dong Liang</strong></p></article><div class="toolkit"><span class="small-heading">RESEARCH TOOLKIT</span><p>PyTorch · Python · MATLAB · C++</p><p class="minor">3D medical imaging, flow matching, diffusion models, and multimodal learning.</p></div></div></div></section>
-<section id="contact" class="contact-section"><div class="wrap contact-inner"><div><span class="eyebrow">Contact</span><h2>Get in touch.</h2><p>For PhD opportunities and research conversations in medical image analysis, generative modeling, and multimodal learning.</p></div><div class="contact-links"><a class="email-link" href="mailto:hk.wang2@siat.ac.cn">hk.wang2@siat.ac.cn <span aria-hidden="true">↗</span></a><a href="https://github.com/hekaiwang" target="_blank" rel="noopener">GitHub / hekaiwang <span aria-hidden="true">↗</span></a><a href="assets/hekai-wang-research-overview.pdf?v=5" target="_blank" rel="noopener">Research overview / PDF <span aria-hidden="true">↗</span></a></div></div></section></main><footer class="footer wrap"><span>© 2026 Hekai Wang</span><span class="image-credits">Campus imagery: <a href="https://ic-en.ucas.ac.cn/page/visit-ic-ucas" target="_blank" rel="noopener">International College, UCAS</a> · <a href="https://www.siat.ac.cn/jyjx/zsxx/bszs/202412/t20241214_7459015.html" target="_blank" rel="noopener">SIAT, CAS</a></span><a href="#about">Back to top ↑</a></footer><dialog id="research-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Close research poster">Close ×</button><div id="dialog-body"></div></dialog><div class="toast" role="status" aria-live="polite" hidden></div></body></html>
+
+<section class="section" aria-labelledby="about-title">
+  <div class="wrap" id="about">
+    <header class="section-header">
+      <h2 class="section-title" id="about-title">About</h2>
+    </header>
+    <div class="about">
+      <figure class="portrait">
+        <img src="assets/hekai-wang-portrait.webp" alt="Portrait of Hekai Wang" width="900" height="1200" loading="lazy" decoding="async">
+      </figure>
+      <div class="about-text">
+        <p class="lead">I am a master’s student at the University of Chinese Academy of Sciences, researching anatomy-guided medical image analysis at the Shenzhen Institutes of Advanced Technology (SIAT), Chinese Academy of Sciences.</p>
+        <p>At the Paul C. Lauterbur Research Center for Biomedical Imaging I am advised by <strong>Prof. Haifeng Wang</strong> and <strong>Prof. Dong Liang</strong>. I study how anatomical structure can guide segmentation, synthesis and image–language analysis when medical images are incomplete or heterogeneous, with a focus on <strong>anatomical priors, modality-aware representations and explicit evidence</strong>.</p>
+        <p>Alongside method development, I have worked on MRI pulse-sequence development and reconstruction at United Imaging Healthcare, and on clinical prediction studies with Shenzhen Guangming District People’s Hospital. I am seeking PhD positions starting in Fall 2027.</p>
+        <div class="interests">
+          <p class="mini-label">Research interests</p>
+          <ul class="chips">
+            <li>Medical image segmentation</li>
+            <li>MRI synthesis &amp; reconstruction</li>
+            <li>Multimodal medical imaging</li>
+            <li>Generative models</li>
+          </ul>
+        </div>
+        <div class="about-links">
+          <a class="btn-s" href="mailto:hk.wang2@siat.ac.cn"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>hk.wang2@siat.ac.cn</a>
+          <a class="btn-s" href="https://github.com/hekaiwang" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-branch"/></svg>GitHub</a>
+          <a class="btn-s" href="assets/hekai-wang-research-overview.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>Research overview</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone" aria-labelledby="research-title">
+  <div class="wrap" id="research">
+    <header class="section-header">
+      <h2 class="section-title" id="research-title">Research</h2>
+      <p class="section-desc section-question">How much anatomical information is available, and how should a model use it?</p>
+    </header>
+    <div class="cards">
+      <article class="card">
+        <p class="card-top"><span class="card-num">01</span><span class="card-kicker">Understand</span></p>
+        <h3>Anatomy-aware understanding</h3>
+        <p>How can structural knowledge guide segmentation across organs and across the MRI modalities that happen to be available?</p>
+        <p class="card-links"><span class="card-links-label">Related work</span><a class="tag" href="publications.html#pub-ap-mamba">AP-Mamba</a><a class="tag" href="publications.html#pub-reliss">ReLiSS</a></p>
+      </article>
+      <article class="card">
+        <p class="card-top"><span class="card-num">02</span><span class="card-kicker">Recover</span></p>
+        <h3>Learning with incomplete inputs</h3>
+        <p>What can be recovered from missing MRI sequences, from structural MRI alone, or from only two X-ray views?</p>
+        <p class="card-links"><span class="card-links-label">Related work</span><a class="tag" href="publications.html#pub-prior-flow">PriorFM</a><a class="tag" href="publications.html#pub-upath">UPath-X2CT</a><a class="tag" href="publications.html#pub-atlantis">ATLANTIS</a></p>
+      </article>
+      <article class="card">
+        <p class="card-top"><span class="card-num">03</span><span class="card-kicker">Review</span></p>
+        <h3>Image–language consistency</h3>
+        <p>Does a presented radiograph retain the anatomical evidence needed to support a report statement?</p>
+        <p class="card-links"><span class="card-links-label">Related work</span><a class="tag" href="publications.html#pub-oa-cxr">OA-CXR</a></p>
+      </article>
+    </div>
+    <div class="research-foot">
+      <p>I am currently exploring medical foundation models guided by concept-aware prompts and structured anatomical text.</p>
+      <a class="btn-s" href="assets/hekai-wang-research-overview.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>Research overview (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="selected-title">
+  <div class="wrap" id="selected">
+    <header class="section-header">
+      <h2 class="section-title" id="selected-title">Selected publications</h2>
+      <a class="btn-s btn-more" href="publications.html">All publications<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </header>
+    <div class="pub-list">
+    <article class="pub">
+        <div class="pub-badge"><span class="venue">EMBC 2026</span><span class="flag flag-oral">Oral</span></div>
+        <div class="pub-main">
+          <h3 class="pub-title"><a href="papers/ap-mamba.pdf" target="_blank" rel="noopener">AP-Mamba: Anatomy-Aware State Space Models for Multi-organ Abdominal MRI Segmentation</a></h3>
+          <p class="pub-authors"><b>Hekai Wang</b>, Xingyang Wu, Isah Salim Ahmad, Shuo Zhou, Zhao Liao, Caijin Zhou, Yihang Zhou, Dong Liang, Zhanqi Hu, Haifeng Wang</p>
+          <p class="pub-venue">International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC), 2026</p>
+          <div class="pub-actions">
+            <a class="btn-s" href="papers/ap-mamba.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>PDF</a>
+            <a class="btn-s" href="https://github.com/hekaiwang/AP-MAMBA" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+
+    <article class="pub">
+        <div class="pub-badge"><span class="venue">BIBM 2026</span><span class="flag flag-oral">Oral</span></div>
+        <div class="pub-main">
+          <h3 class="pub-title"><a href="papers/prior-flow.pdf" target="_blank" rel="noopener">Prior-Guided Flow Matching for Missing Modality MRI Synthesis</a></h3>
+          <p class="pub-authors"><b>Hekai Wang</b>, Zhenrong He, Xingyang Wu, Yihang Zhou, Dong Liang, Haifeng Wang</p>
+          <p class="pub-venue">IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2026</p>
+          <div class="pub-actions">
+            <a class="btn-s" href="papers/prior-flow.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>PDF</a>
+            <a class="btn-s" href="https://github.com/hekaiwang/PriorFM" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+
+    <article class="pub">
+        <div class="pub-badge"><span class="venue">BHI 2026</span><span class="flag flag-oral">Oral</span></div>
+        <div class="pub-main">
+          <h3 class="pub-title"><a href="papers/atlantis.pdf" target="_blank" rel="noopener">ATLANTIS: An Anatomy-guided Tissue-Latent Atlas Network for DWI-derived White-Matter Anisotropy Synthesis from T1w MRI</a></h3>
+          <p class="pub-authors">Zhenrong He, Bin Zhang, <b>Hekai Wang</b>, Shuo Zhou, Xingyang Wu, Lixian Zou, Yihang Zhou, Haifeng Wang</p>
+          <p class="pub-venue">IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI), 2026</p>
+          <div class="pub-actions">
+            <a class="btn-s" href="papers/atlantis.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>PDF</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section band" aria-labelledby="contact-title">
+  <div class="wrap" id="contact">
+    <header class="section-header">
+      <h2 class="section-title" id="contact-title">Contact</h2>
+      <p class="section-desc">I welcome conversations about PhD opportunities and research in medical image analysis, MRI and generative modeling.</p>
+    </header>
+    <div class="contact-grid">
+      <div class="c-card">
+        <p class="c-label"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Email</p>
+        <p class="c-value"><a href="mailto:hk.wang2@siat.ac.cn" id="email-address">hk.wang2@siat.ac.cn</a></p>
+        <div class="c-actions">
+          <button class="btn-s" type="button" data-copy="hk.wang2@siat.ac.cn"><svg class="i i-idle" aria-hidden="true"><use href="#i-copy"/></svg><svg class="i i-done" aria-hidden="true"><use href="#i-check"/></svg><span class="label">Copy</span></button>
+          <a class="btn-s" href="mailto:hk.wang2@siat.ac.cn">Write<svg class="i" aria-hidden="true"><use href="#i-ext"/></svg></a>
+        </div>
+      </div>
+      <a class="c-card c-link" href="https://github.com/hekaiwang" target="_blank" rel="noopener">
+        <p class="c-label"><svg class="i" aria-hidden="true"><use href="#i-branch"/></svg>GitHub</p>
+        <p class="c-value">github.com/hekaiwang</p>
+        <span class="c-go" aria-hidden="true"><svg class="i"><use href="#i-ext"/></svg></span>
+      </a>
+      <a class="c-card c-link" href="assets/hekai-wang-research-overview.pdf" target="_blank" rel="noopener">
+        <p class="c-label"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>Research overview</p>
+        <p class="c-value">One-page summary (PDF)</p>
+        <span class="c-go" aria-hidden="true"><svg class="i"><use href="#i-ext"/></svg></span>
+      </a>
+      <div class="c-card">
+        <p class="c-label"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Location</p>
+        <p class="c-value">Paul C. Lauterbur Research Center for Biomedical Imaging, SIAT, CAS, Shenzhen, China</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p>© 2026 Hekai Wang<span class="dot-sep" aria-hidden="true">·</span>Campus photographs: UCAS and SIAT, CAS</p>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="publications.html">Publications</a>
+      <a href="experience.html">Experience</a>
+      <a href="#top">Back to top</a>
+    </nav>
+  </div>
+</footer>
+
+<p class="visually-hidden" id="live" role="status" aria-live="polite"></p>
+</body>
+</html>
