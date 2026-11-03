@@ -21,14 +21,14 @@
   function showProject(id, trigger) {
     const p = window.RESEARCH_PROJECTS.find(item => item.id === id);
     if (!p) return;
-    body.innerHTML = `<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><div class="figure-tabs" role="group" aria-label="Choose research figure"><button type="button" data-figure="overview" aria-pressed="true">Method overview</button><button type="button" data-figure="results" aria-pressed="false">Results & evaluation</button></div><figure class="dialog-overview"><img id="dialog-figure" src="assets/${escape(p.overview_asset)}" alt="Method overview from ${escape(p.name)}"></figure><p class="figure-caption">Original method figure from the linked paper.</p><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 class="subheading">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c => `<li>${escape(c)}</li>`).join('')}</ul><h3 class="subheading">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">View repository ↗</a><button type="button" class="citation-button" data-citation="${escape(p.id)}">BibTeX</button></div>`;
+    body.innerHTML = `<p class="dialog-eyebrow">${escape(p.topic)} / ${escape(p.status)}</p><h2 class="dialog-title" id="dialog-title">${escape(p.name)}</h2><p class="dialog-paper-title">${escape(p.title)}</p><div class="figure-tabs" role="group" aria-label="Choose research figure"><button type="button" data-figure="overview" aria-pressed="true">Method overview</button><button type="button" data-figure="results" aria-pressed="false">Results & evaluation</button></div><figure class="dialog-overview"><img id="dialog-figure" src="assets/${escape(p.overview_asset)}" alt="Method overview from ${escape(p.name)}"></figure><p class="figure-caption">${escape(p.method_caption || "Original method figure from the linked paper.")}</p><div class="dialog-columns"><div><h3>The research question</h3><p>${escape(p.question)}</p><h3 class="subheading">The approach</h3><p>${escape(p.summary)}</p></div><div><h3>Method highlights</h3><ul>${p.contributions.map(c => `<li>${escape(c)}</li>`).join('')}</ul><h3 class="subheading">Evaluation setting</h3><p>${escape(p.evaluation)}</p></div></div><div class="dialog-links"><a href="${escape(p.pdf)}" target="_blank" rel="noopener">Read paper ↗</a><a href="${escape(p.code)}" target="_blank" rel="noopener">View repository ↗</a><button type="button" class="citation-button" data-citation="${escape(p.id)}">BibTeX</button></div>`;
     body.querySelectorAll('[data-figure]').forEach(button => button.addEventListener('click', () => {
       const kind = button.dataset.figure;
       body.querySelectorAll('[data-figure]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
       const img = body.querySelector('#dialog-figure');
       img.src = 'assets/' + p[kind + '_asset'];
       img.alt = (kind === 'overview' ? 'Method overview' : 'Evaluation figure') + ' from ' + p.name;
-      body.querySelector('.figure-caption').textContent = kind === 'overview' ? 'Original method figure from the linked paper.' : 'Original evaluation figure. Refer to the paper for the full experimental setting.';
+      body.querySelector('.figure-caption').textContent = kind === 'overview' ? (p.method_caption || 'Original method figure from the linked paper.') : 'Original evaluation figure. Refer to the paper for the full experimental setting.';
     }));
     openDialog(trigger);
   }
@@ -69,25 +69,67 @@
   });
   dialog.addEventListener('close', () => { document.body.style.overflow = ''; if (lastTrigger?.isConnected) lastTrigger.focus(); });
 
-  const showcase = [
-    {image:'segmentation.webp',alt:'Multi-organ abdominal MRI segmentation examples from AP-Mamba',topic:'AP-Mamba · Abdominal MRI',title:'Anatomy-aware segmentation.',description:'Learning organ relationships and refining boundaries in abdominal MRI.',project:'ap-mamba',name:'AP-Mamba'},
-    {image:'synthesis.webp',alt:'MRI synthesis examples from PriorFM',topic:'PriorFM · Missing modalities',title:'Recovering missing MRI contrasts.',description:'Using observed anatomy to guide missing-modality MRI synthesis.',project:'prior-flow',name:'PriorFM'},
-    {image:'review.webp',alt:'Anatomical retention and report review framework from OA-CXR',topic:'OA-CXR · Image–language consistency',title:'Image-grounded report review.',description:'Connecting retained anatomy with statements that warrant report review.',project:'oa-cxr',name:'OA-CXR'}
-  ];
-  document.querySelectorAll('[data-showcase]').forEach(button => button.addEventListener('click', () => {
-    const i = Number(button.dataset.showcase), item = showcase[i];
-    document.querySelectorAll('[data-showcase]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-    const img = document.querySelector('#showcase-image'); img.src = 'assets/' + item.image; img.alt = item.alt;
-    document.querySelector('#showcase-topic').textContent = item.topic;
-    document.querySelector('#showcase-title').textContent = item.title;
-    document.querySelector('#showcase-description').textContent = item.description;
-    document.querySelector('.showcase-counter').textContent = `0${i+1} / 03`;
-    const link = document.querySelector('.showcase-link'); link.dataset.project = item.project; link.innerHTML = `Explore ${escape(item.name)} <span aria-hidden="true">↗</span>`;
-    const imageButton = document.querySelector('.showcase-window');
-    imageButton.dataset.project = item.project;
-    imageButton.setAttribute('aria-label', `Open ${item.name} research details`);
-    if (!reducedMotion && img.animate) img.animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:330,easing:'cubic-bezier(.2,.7,.2,1)'});
+  // Campus changes are slow, pausable, and suspended off screen.
+  const hero = document.querySelector('.profile-hero');
+  const campusButtons = [...document.querySelectorAll('[data-campus]')];
+  const scenes = [...document.querySelectorAll('[data-scene]')];
+  const pauseButton = document.querySelector('.campus-pause');
+  const campusNames = ['UCAS · Yanqihu campus', 'SIAT, CAS · Shenzhen'];
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let activeCampus = 0, campusTimer, userPaused = motionPreference.matches, heroVisible = true, resumeWhileFocused = false;
+  function selectCampus(index) {
+    activeCampus = index;
+    scenes.forEach((scene, i) => scene.classList.toggle('is-active', i === index));
+    campusButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+    document.querySelector('#campus-caption').textContent = campusNames[index];
+  }
+  function syncCampusPlayback() {
+    clearInterval(campusTimer);
+    const paused = userPaused || motionPreference.matches;
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', paused ? 'Play campus slideshow' : 'Pause campus slideshow');
+    pauseButton.title = paused ? 'Play campus slideshow' : 'Pause campus slideshow';
+    if (!paused && heroVisible && !document.hidden && (resumeWhileFocused || !hero.querySelector('.campus-switcher').contains(document.activeElement))) {
+      campusTimer = setInterval(() => selectCampus((activeCampus + 1) % scenes.length), 9000);
+    }
+  }
+  campusButtons.forEach((button, index) => button.addEventListener('click', () => {
+    selectCampus(index); userPaused = true; syncCampusPlayback();
   }));
+  pauseButton.addEventListener('click', () => {
+    if (motionPreference.matches) { userPaused = true; notify('Automatic motion is disabled by your device preference. You can switch campuses manually.'); }
+    else { userPaused = !userPaused; resumeWhileFocused = !userPaused; }
+    syncCampusPlayback();
+  });
+  document.addEventListener('visibilitychange', syncCampusPlayback);
+  const controls = hero.querySelector('.campus-switcher');
+  controls.addEventListener('focusin', () => { resumeWhileFocused = false; syncCampusPlayback(); });
+  controls.addEventListener('focusout', () => requestAnimationFrame(syncCampusPlayback));
+  if ('IntersectionObserver' in window) new IntersectionObserver(entries => {
+    heroVisible = entries[0].isIntersecting; syncCampusPlayback();
+  }, {threshold:0}).observe(hero);
+  motionPreference.addEventListener('change', () => { if (motionPreference.matches) userPaused = true; syncCampusPlayback(); });
+  syncCampusPlayback();
+  // Small pointer depth is limited to fine pointers and respects reduced motion.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let pointerFrame, pointerX = 0, pointerY = 0;
+  hero.addEventListener('pointermove', event => {
+    if (motionPreference.matches || !finePointer.matches) return;
+    const bounds = hero.getBoundingClientRect();
+    pointerX = (event.clientX - bounds.left) / bounds.width - .5;
+    pointerY = (event.clientY - bounds.top) / bounds.height - .5;
+    if (!pointerFrame) pointerFrame = requestAnimationFrame(() => {
+      hero.style.setProperty('--depth-x', `${pointerX * 8}px`);
+      hero.style.setProperty('--depth-y', `${pointerY * 6}px`);
+      pointerFrame = null;
+    });
+  });
+  function resetDepth() {
+    cancelAnimationFrame(pointerFrame); pointerFrame = null;
+    hero.style.setProperty('--depth-x', '0px'); hero.style.setProperty('--depth-y', '0px');
+  }
+  hero.addEventListener('pointerleave', resetDepth);
+  motionPreference.addEventListener('change', resetDepth);
 
   const gallery = document.querySelector('#research-gallery');
   const galleryButtons = [...document.querySelectorAll('[data-gallery]')];
