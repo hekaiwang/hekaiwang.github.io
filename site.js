@@ -189,4 +189,75 @@
       button.classList.remove('is-done');
     }, 1800);
   });
+
+  /* Figure preview: opens over the page; closes on a click outside the figure,
+     the Close button, Esc, the mouse wheel, or the browser/phone Back button. */
+  const figureLinks = $$('.figure a');
+  if (figureLinks.length) {
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.hidden = true;
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Figure preview');
+    box.innerHTML = '<figure class="lb-figure"><img alt=""><figcaption><span class="lb-caption"></span><span class="lb-hint lb-hint-pointer">Click outside the figure or press Esc to close.</span><span class="lb-hint lb-hint-touch">Tap outside the figure to close.</span></figcaption></figure>'
+      + '<div class="lb-bar"><a class="lb-open" target="_blank" rel="noopener">Open original</a><button class="lb-close" type="button">Close</button></div>';
+    document.body.append(box);
+    const boxImg = $('img', box);
+    const boxCaption = $('.lb-caption', box);
+    const openLink = $('.lb-open', box);
+    const closeButton = $('.lb-close', box);
+    let trigger = null;
+    let historyEntry = false;
+    let hideTimer = 0;
+
+    const isOpen = () => !box.hidden && box.classList.contains('is-open');
+    const open = link => {
+      const img = $('img', link);
+      const caption = link.closest('.figure')?.querySelector('figcaption')?.textContent.replace(/\s*Click to enlarge\.?\s*$/, '') || '';
+      clearTimeout(hideTimer);
+      trigger = link;
+      boxImg.src = img.currentSrc || img.src;
+      boxImg.alt = img.alt;
+      boxCaption.textContent = caption;
+      openLink.href = link.href;
+      box.hidden = false;
+      doc.classList.add('lb-lock');
+      requestAnimationFrame(() => box.classList.add('is-open'));
+      history.pushState({ figurePreview: true }, '');
+      historyEntry = true;
+      closeButton.focus({ preventScroll: true });
+    };
+    const close = ({ fromHistory = false } = {}) => {
+      if (box.hidden) return;
+      box.classList.remove('is-open');
+      doc.classList.remove('lb-lock');
+      hideTimer = setTimeout(() => { box.hidden = true; boxImg.removeAttribute('src'); }, reduceMotion.matches ? 0 : 220);
+      if (trigger) trigger.focus({ preventScroll: true });
+      if (historyEntry) {
+        historyEntry = false;
+        if (!fromHistory) history.back();
+      }
+    };
+
+    figureLinks.forEach(link => link.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      open(link);
+    }));
+    box.addEventListener('click', event => {
+      if (event.target === boxImg || event.target.closest('.lb-open')) return;
+      close();
+    });
+    box.addEventListener('wheel', event => { if (!event.ctrlKey) close(); }, { passive: true });
+    document.addEventListener('keydown', event => {
+      if (!isOpen()) return;
+      if (event.key === 'Escape') { event.preventDefault(); close(); }
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        (document.activeElement === closeButton ? openLink : closeButton).focus();
+      }
+    });
+    addEventListener('popstate', () => { if (historyEntry) close({ fromHistory: true }); });
+  }
 })();

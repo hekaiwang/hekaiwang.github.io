@@ -268,6 +268,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .detail li + li { margin-top: 6px; }
 .detail li::marker { color: var(--accent); }
 
+/* Figure preview */
+html.lb-lock { overflow: hidden; }
+.lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 72px clamp(12px, 4vw, 56px) clamp(16px, 4vh, 40px); background: rgba(12, 13, 15, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transition: opacity .22s ease; cursor: zoom-out; touch-action: pinch-zoom; overscroll-behavior: contain; }
+.lightbox[hidden] { display: none; }
+.lightbox.is-open { opacity: 1; }
+.lb-figure { display: flex; flex-direction: column; align-items: center; max-width: 100%; max-height: 100%; min-height: 0; }
+.lb-figure img { width: auto; height: auto; max-width: min(100%, 1800px); max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); padding: clamp(8px, 1.4vw, 20px); background: #fff; border-radius: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); cursor: default; transform: scale(.985); transition: transform .3s var(--ease); }
+.lightbox.is-open .lb-figure img { transform: none; }
+.lb-figure figcaption { margin-top: 14px; font-size: .9rem; line-height: 1.5; color: rgba(255, 255, 255, .78); text-align: center; cursor: zoom-out; }
+.lb-caption:not(:empty)::after { content: " · "; color: rgba(255, 255, 255, .4); }
+.lb-hint { color: rgba(255, 255, 255, .55); }
+.lb-hint-touch { display: none; }
+@media (hover: none) { .lb-hint-pointer { display: none; } .lb-hint-touch { display: inline; } }
+.lb-bar { position: absolute; top: 14px; right: clamp(12px, 3vw, 24px); display: flex; gap: 10px; }
+.lb-bar a, .lb-bar button { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid rgba(255, 255, 255, .32); border-radius: 999px; background: rgba(255, 255, 255, .06); color: #fff; font-size: .9rem; font-weight: 600; cursor: pointer; transition: border-color .2s ease, background-color .2s ease; }
+.lb-bar a:hover, .lb-bar button:hover { border-color: #fff; background: rgba(255, 255, 255, .12); }
+@media (prefers-reduced-motion: reduce) { .lightbox, .lb-figure img { transition: none; } }
+
 /* Experience */
 .xp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 64px; }
 .xp-wide { grid-column: 1 / -1; }
