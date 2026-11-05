@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://hekaiwang.github.io/publications.html">
 <meta property="og:title" content="Publications — Hekai Wang">
 <meta property="og:description" content="Publications, manuscripts under review and patents by Hekai Wang (UCAS / SIAT, CAS): MRI segmentation, synthesis, cross-modal reconstruction and report review.">
-<meta property="og:image" content="https://hekaiwang.github.io/assets/research-overview-preview.webp?v=2">
+<meta property="og:image" content="https://hekaiwang.github.io/assets/research-overview-preview.webp?v=3">
 <link rel="icon" href="favicon.ico?v=2" sizes="16x16 32x32 48x48">
 <link rel="icon" href="favicon-32.png?v=2" type="image/png" sizes="32x32">
 <link rel="icon" href="favicon-192.png?v=2" type="image/png" sizes="192x192">
@@ -187,22 +187,22 @@
       </article>
 
       <article class="pub" id="pub-oa-cxr">
-        <div class="pub-badge"><span class="venue">ESWA</span><span class="flag">Under review</span></div>
+        <div class="pub-badge"><span class="venue">Journal</span><span class="flag">Under review</span></div>
         <div class="pub-main">
-          <h4 class="pub-title"><a href="papers/oa-cxr.pdf" target="_blank" rel="noopener">OA-CXR: An Anatomical Retention-Guided System for Selective Chest Radiograph Report Review</a></h4>
+          <h4 class="pub-title"><a href="papers/oa-cxr.pdf?v=2" target="_blank" rel="noopener">OA-CXR: An Anatomical-Retention-Guided System for Selective Chest Radiograph Report Review</a></h4>
           <p class="pub-authors"><b>Hekai Wang</b>, Zhenrong He, Shengran Fan, Qiang Zhang, Yaxin Cai, Shuyuan Chen, Caijin Zhou, Xingyang Wu, Shuo Zhou, Xin Liu, Yihang Zhou, Zhanqi Hu, Haifeng Wang</p>
-          <p class="pub-venue">Expert Systems with Applications</p>
+          <p class="pub-venue">Journal article, under review</p>
           <div class="pub-actions">
-            <a class="btn-s" href="papers/oa-cxr.pdf" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>PDF</a>
+            <a class="btn-s" href="papers/oa-cxr.pdf?v=2" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>PDF</a>
             <a class="btn-s" href="https://github.com/hekaiwang/OA-CXR" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
             <button class="btn-s" type="button" data-toggle aria-expanded="false" aria-controls="oa-cxr-detail">Details<svg class="i chev" aria-hidden="true"><use href="#i-chev"/></svg></button>
           </div>
           <div class="reveal" id="oa-cxr-detail"><div class="reveal-inner"><div class="detail">
-            <p class="detail-summary">Source-relative anatomical retention provides an image-grounded signal for prioritizing generated chest-radiograph reports for review.</p>
+            <p class="detail-summary">A generated report statement is trustworthy only if the presented image still contains the anatomy it refers to. OA-CXR checks this statement by statement, using source-relative anatomical retention, and allocates clinician review accordingly.</p>
             <figure class="figure"><a href="assets/fig-oa-cxr.webp" target="_blank" rel="noopener" aria-label="Open the OA-CXR figure at full size"><img src="assets/fig-oa-cxr.webp" alt="OA-CXR two-stage learning, inference and report coverage review" width="1429" height="738" loading="lazy" decoding="async"></a><figcaption>Method overview, from the paper. Click to enlarge.</figcaption></figure>
             <div class="detail-cols">
-              <div><h5>Key ideas</h5><ul><li>A two-stage global–regional model estimates retained anatomical information.</li><li>A fixed parser maps eligible report statements to anatomical queries.</li><li>Statement-level flags and fixed-budget report prioritization connect retention to review.</li></ul></div>
-              <div><h5>Evaluation</h5><p>343,395 queries from 8,805 source images across four public datasets, plus an independent cohort of 797 pediatric radiographs.</p></div>
+              <div><h5>Key ideas</h5><ul><li>A two-stage global–regional model estimates retained anatomical information.</li><li>A knowledge base maps findings to the lung regions needed to support them.</li><li>Statement-level flags and budget-constrained report prioritization connect retention to review.</li></ul></div>
+              <div><h5>Evaluation</h5><p>343,395 queries across four public datasets: lowest error among nine retention regressors (macro MAE 0.0296). Reviewing 50% of MAIRA-2 reports captures 91.7% of those with low-retention statements. External pediatric cohort (797 radiographs): MAE 0.0281, AUROC 0.974 without adaptation.</p></div>
             </div>
           </div></div></div>
         </div>
@@ -257,7 +257,7 @@
       <a class="strip-email" href="mailto:hk.wang2@siat.ac.cn" id="email-address"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>hk.wang2@siat.ac.cn</a>
       <button class="btn-s" type="button" data-copy="hk.wang2@siat.ac.cn"><svg class="i i-idle" aria-hidden="true"><use href="#i-copy"/></svg><svg class="i i-done" aria-hidden="true"><use href="#i-check"/></svg><span class="label">Copy</span></button>
       <a class="btn-s" href="https://github.com/hekaiwang" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-branch"/></svg>GitHub</a>
-      <a class="btn-s" href="assets/hekai-wang-cv.pdf?v=1" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>CV</a>
+      <a class="btn-s" href="assets/hekai-wang-cv.pdf?v=2" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-doc"/></svg>CV</a>
     </div>
   </div>
 </section>
